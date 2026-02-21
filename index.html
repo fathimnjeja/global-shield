@@ -1,0 +1,56 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Disaster Shield</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffcc00">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_KEY&libraries=visualization"></script>
+</head>
+
+<body>
+
+<header>
+<h1>🌍 Global Disaster Shield</h1>
+<button onclick="getLocation()">📍 Detect Location</button>
+<button onclick="toggleDarkMode()">🌙 Toggle Mode</button>
+</header>
+
+<section class="dashboard">
+<div class="card"><canvas id="riskGauge"></canvas></div>
+<div class="card" id="tempCard">Temp: --</div>
+<div class="card" id="aqiCard">AQI: --</div>
+<div class="card" id="uvCard">UV: --</div>
+</section>
+
+<section>
+<h2>Decision & Reminders</h2>
+<p id="decision"></p>
+<ul id="reminders"></ul>
+</section>
+
+<section>
+<h2>Global Disaster Status</h2>
+<p id="earthquakeStatus"></p>
+<p id="volcanoStatus"></p>
+<p id="floodStatus"></p>
+</section>
+
+<section>
+<h2>Live Disaster Map</h2>
+<div id="map"></div>
+</section>
+
+<section>
+<h2>Emergency</h2>
+<button onclick="sendEmergency()">🚨 Share My Location</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
