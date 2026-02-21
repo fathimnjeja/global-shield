@@ -19,7 +19,7 @@ function getLocation(){
 
 /* WEATHER */
 async function getWeather(){
- const key="YOUR_OPENWEATHER_KEY";
+ const key="7da3a9b9048ee2cfc09dcffc7ce4f7b9";
  const res=await fetch(
   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`
  );
@@ -35,7 +35,7 @@ async function getWeather(){
 
 /* AQI */
 async function getAQI(){
- const key="YOUR_OPENWEATHER_KEY";
+ const key="7da3a9b9048ee2cfc09dcffc7ce4f7b9";
  const res=await fetch(
   `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${key}`
  );
@@ -47,7 +47,7 @@ async function getAQI(){
 
 /* UV */
 async function getUV(){
- const key="YOUR_OPENWEATHER_KEY";
+ const key="7da3a9b9048ee2cfc09dcffc7ce4f7b9";
  const res=await fetch(
   `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${key}`
  );
@@ -176,13 +176,18 @@ function toggleDarkMode(){
 }
 
 /* PWA */
-if("serviceWorker" in navigator){
- navigator.serviceWorker.register("service-worker.js");
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js") // Points to the Flask route we created
+      .then((reg) => console.log("Service Worker registered!", reg))
+      .catch((err) => console.error("Service Worker registration failed:", err));
+  });
 }
 function startEmergencyMode() {
   setInterval(() => {
     navigator.geolocation.getCurrentPosition(pos => {
-      fetch("http://localhost:3000/update-location", {
+      fetch("http://localhost:5000/update-location", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

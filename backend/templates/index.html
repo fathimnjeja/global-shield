@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Global Disaster Shield</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#ffcc00">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_KEY&libraries=visualization"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh6gB9pLYeTImyJp7yaw_-R71-c7YgJak&libraries=visualization"></script>
 </head>
 
 <body>
@@ -51,6 +51,6 @@
 <button onclick="sendEmergency()">🚨 Share My Location</button>
 </section>
 
-<script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

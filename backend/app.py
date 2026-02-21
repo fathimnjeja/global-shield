@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,send_from_directory
 from dotenv import load_dotenv
 
 # Load API keys from .env
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 API_KEY = os.getenv("WEATHER_API_KEY")
 EMERGENCY_NUMBER=os.getenv("EMERGENCY NUMBER")
-
+print(f"Loaded API Key: {API_KEY}")
 # Function to generate safety advice based on temperature, AQI, UV, and flood status
 def get_safety_advice(temp, aqi, uv, flood_status):
     advice = []
@@ -42,7 +42,7 @@ def index():
 def get_safety():
     # Get city from form (or use GPS in real app)
     city = request.form.get('city')
-    
+    print(f"Received city: {city}")
     # 1. Fetch weather data from OpenWeatherMap
     w_url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
     res = requests.get(w_url).json()
@@ -64,7 +64,11 @@ def get_safety():
         "shelters": ["Central Community Center", "East Side High School"],
         "emergency number":"911"
     })
-
-# Run the app
+@app.route('/service-worker.js')
+@app.route('/service-worker.js')
+def serve_sw():
+    return send_from_directory(os.path.join(app.root_path, 'static/js'), 
+                               'service-worker.js', 
+                               mimetype='application/javascript')# Run the app
 if __name__ == '__main__':
     app.run(debug=True)
